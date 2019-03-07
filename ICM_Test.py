@@ -1,5 +1,9 @@
 from pynput.keyboard import Key, Controller
 import time
+import os
+import signal
+
+import subprocess
 
 keyboard = Controller()
 filename = "inputs.txt"
@@ -33,5 +37,20 @@ def run_chess_move(filename):
                 time.sleep(30)
         f.write("")
     
+
+
+p = subprocess.Popen("pronsole")
+
+keyboard = Controller()
+
 setup()
 run_chess_move(filename)
+
+time.sleep(1)
+
+keyboard.type("potato")
+keyboard.press(Key.enter)
+keyboard.release(Key.enter)
+os.killpg(os.getpgid(p.pid), signal.SIGTERM)
+f.write("")
+exit()
